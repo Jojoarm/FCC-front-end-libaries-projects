@@ -1,0 +1,73 @@
+.quote__container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  -webkit-transition: background-color 0.9s;
+  -moz-transition: background-color 0.9s;
+  transition: background-color 0.9s;
+}
+
+.quotes {
+  width: 40%;
+  min-height: 30%;
+  border: 1px solid;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+}
+
+.quote {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  /* min-height: 70%; */
+}
+
+.quote__text {
+  width: 80%;
+  font-size: 40px;
+  font-weight: 400;
+  align-self: center;
+}
+
+.author {
+  text-align: right;
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.twitter__share,
+.new__quote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  margin-bottom: 20px;
+  background-color: blue;
+  outline: none;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.new__quote {
+  width: 150px;
+  font-size: 20px;
+  font-weight: 400;
+}
+.twitter__share {
+  width: 60px;
+}
+
+.share {
+  width: 90%;
+  /* height: 30%; */
+  display: flex;
+  justify-content: space-between;
+}
