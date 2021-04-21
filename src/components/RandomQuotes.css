@@ -29,8 +29,8 @@
 }
 
 .quote__text {
-  width: 80%;
-  font-size: 40px;
+  width: 100%;
+  font-size: 30px;
   font-weight: 400;
   align-self: center;
 }
@@ -70,4 +70,14 @@
   /* height: 30%; */
   display: flex;
   justify-content: space-between;
+}
+
+.spinner {
+  margin-top: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 640px) {
 }
