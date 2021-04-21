@@ -20,7 +20,7 @@ const Projects = () => {
                     <div className="display__picture">
                         <img src={random}  alt="display picture" className="display__pic" />
                     </div>
-                    <p>Calculator</p>
+                    <p>Calculator Project</p>
                 </div>
             </Link>
         </div>
