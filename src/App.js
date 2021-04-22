@@ -6,6 +6,8 @@ import RandomQuotes from './components/RandomQuotes';
 import Calculator from './components/Calculator';
 import Calc from './components/calculator/Calc'
 import MarkdownPreviewer from './components/markdown/MarkdownPreviewer';
+import Timer from './components/timer/Timer';
+import FccTimer from './components/timer/FccTimer';
 
 function App() {
   return (
@@ -23,6 +25,9 @@ function App() {
           </Route>
           <Route path="/markdown-previewer">
             <MarkdownPreviewer />
+          </Route>
+          <Route path="/timer">
+            <FccTimer />
           </Route>
 
         </Switch>
