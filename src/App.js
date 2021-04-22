@@ -5,6 +5,7 @@ import Projects from './components/Projects';
 import RandomQuotes from './components/RandomQuotes';
 import Calculator from './components/Calculator';
 import Calc from './components/calculator/Calc'
+import MarkdownPreviewer from './components/markdown/MarkdownPreviewer';
 
 function App() {
   return (
@@ -18,7 +19,10 @@ function App() {
             <RandomQuotes />
           </Route>
           <Route path="/calculator">
-            <Calc />
+            <Calculator />
+          </Route>
+          <Route path="/markdown-previewer">
+            <MarkdownPreviewer />
           </Route>
 
         </Switch>
