@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import './Timer.css'
 
 const Timer = () => {
@@ -104,6 +105,9 @@ const Timer = () => {
 
     return (
         <div className="timer">
+            <Link to="/" style={{textDecoration: 'underline', color: 'black', alignSelf: 'flex-start', position: 'fixed', left:'30px', top: '30px', padding: '20px'}}>
+                Back to Projects
+            </Link>
             <div className="timer__container">
                 <h1>25+5 Clock by JoJo</h1>
                 <div className="length__container">

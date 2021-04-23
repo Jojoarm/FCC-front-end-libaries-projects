@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import './Markdown.css'
 
 const marked = require("marked");
@@ -56,6 +57,9 @@ And here. | Okay. | I think we get it.
     }
     return (
         <div className="preview__container">
+            <Link to="/" style={{textDecoration: 'underline', color: 'black', alignSelf: 'flex-start', position: 'fixed', left:'30px', top: '30px', padding: '20px'}}>
+                Back to Projects
+            </Link>
             <div className="input__container">
                 <label for="editor">Markdown Input</label>
                 <textarea 

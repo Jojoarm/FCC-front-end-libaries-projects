@@ -52,3 +52,7 @@
   height: 80%;
   padding-left: 30px;
 }
+
+label {
+  color: black;
+}

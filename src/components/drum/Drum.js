@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Pad from './Pad';
 import './Drum.css'
 import { useStateValue } from '../../StateContext';
+import { Link } from 'react-router-dom';
 //Audio array
 const bankOne = [
     {
@@ -118,47 +119,133 @@ const bankOne = [
   ];
 
   const activeStyle = {
-    backgroundColor: 'orange',
-    boxShadow: '0 3px orange',
-    height: 77,
-    marginTop: 13
+    backgroundColor: '#9bd5f7',
+    boxShadow: '0 3px #9bd5f7',
   };
   
   const inactiveStyle = {
-    backgroundColor: 'grey',
-    marginTop: 10,
+    backgroundColor: 'whitesmoke',
     boxShadow: '3px 3px 5px black'
   };
 
 const Drum = () => {
-    const [musicBank, selectMusicBank] = useState(bankOne)
-    // const [display, setDisplay] = useState('');
+    const [musicBank, setMusicBank] = useState(bankTwo)
+    const [sliderVal, setSliderVal] = useState(0.3)
+    const [currentPadBankId, setCurrentPadBankId] = useState('Heater Kit');
     const [{ display}, dispatch] = useStateValue();
-    const [power, setPower] = useState(false)
+    const [power, setPower] = useState(true)
 
-    // function displayClipName(name) {
-    //     setDisplay(name)
-    //     // if (power) {
-    //     //     setDisplay(name)
-    //     // }
-    //   }
+    function powerControl() {
+      setPower(!power)
+      // setDisplay(String.fromCharCode(160))
+    }
+  function selectBank() {
+      if (power) {
+        if (currentPadBankId === 'Heater Kit') {
+            setMusicBank(bankTwo);
+            dispatch({
+              type: 'UPDATE_DISPLAY',
+              item: {
+                  name: 'Smooth Piano Kit'
+              }, 
+          })
+            setCurrentPadBankId('Smooth Piano Kit')
+        } else {
+              setMusicBank(bankOne);
+              dispatch({
+                type: 'UPDATE_DISPLAY',
+                item: {
+                    name: 'Heater Kit'
+                }, 
+            })
+              setCurrentPadBankId('Heater Kit')
+        }
+      }
+    }
+    function adjustVolume(e) {
+      if (power) {
+          setSliderVal(e.target.value)
+          dispatch({
+            type: 'UPDATE_DISPLAY',
+            item: {
+                name: 'Volume: ' + Math.round(e.target.value * 100)
+            }, 
+        })
+          setTimeout(() => clearDisplay(), 1000);
+      }
+    }
+  function clearDisplay() {
+      dispatch({
+        type: 'UPDATE_DISPLAY',
+        item: {
+            name: String.fromCharCode(160)
+        }, 
+    })
+    }
+    
+    const powerSlider = power
+              ? {
+                  float: 'right'
+                }
+              : {
+                  float: 'left',
+                  background:'red'
+                };
+            const bankSlider =
+                musicBank === bankOne
+                ? {
+                    float: 'left'
+                  }
+                : {
+                    float: 'right'
+                  };
+            
 
     return (
+      <div className="drum__machine">
+        <Link to="/" style={{textDecoration: 'underline', color: 'black', alignSelf: 'flex-start', position: 'fixed', left:'30px', top: '30px', padding: '20px'}}>
+                Back to Projects
+            </Link>
         <div className="drum__container" id="drum-machine">
-            <header>
-                <h1>Music By Jojo</h1>
-                <p>Make music with only one tap</p>
-            </header>
-            <div className="visual" id="display">
-                {display}
+            <div className="drum__box">
+              <header>
+                    <h1>Music By Jojo</h1>
+                    <p>Make music with only one tap</p>
+                </header>
+              <div className="pads__container">
+                  {musicBank.map(bank => (
+                      <Pad bank={bank} activeStyle={activeStyle} sliderVal={sliderVal} inactiveStyle={inactiveStyle} power={power} />
+                  ))}
+              </div>
             </div>
-            <div className="pads__container">
-                {musicBank.map(bank => (
-                    <Pad bank={bank} activeStyle={activeStyle} inactiveStyle={inactiveStyle} power={power} />
-                ))}
+            <div className='controls-container'>
+                <div className='control'>
+                    <p>Power</p>
+                    <div className='select' onClick={powerControl}>
+                    <div className='inner' style={powerSlider} />
+                    </div>
+                </div>
+                <p id='display'>{display}</p>
+                <div className='volume-slider'>
+                    <input
+                    max='1'
+                    min='0'
+                    onChange={adjustVolume}
+                    step='0.01'
+                    type='range'
+                    value={sliderVal}
+                    className="slider__display"
+                    />
+                </div>
+                <div className='control'>
+                    <p>Bank</p>
+                    <div className='select' onClick={selectBank}>
+                        <div className='inner' style={bankSlider} />
+                    </div>
+                </div>
             </div>
-
-        </div>
+            </div>
+      </div>
     )
 }
 

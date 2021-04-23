@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useStateValue } from '../StateContext'
 import './Calculator.css'
 
@@ -146,6 +147,9 @@ const Calculator = () => {
 
     return (
         <div className="calculator__container" id="container">
+            <Link to="/" style={{textDecoration: 'underline', color: 'black', alignSelf: 'flex-start', position: 'fixed', left:'30px', top: '30px', padding: '20px'}}>
+                Back to Projects
+            </Link>
             <div className="calculator">
                 <div className='name'>Calculator by Jojo</div>
                 <div className="display" id="screen">

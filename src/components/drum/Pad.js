@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useStateValue } from '../../StateContext';
 
-const Pad = ({bank, activeStyle, inactiveStyle, power}) => {
+const Pad = ({bank, activeStyle, inactiveStyle, power, sliderVal}) => {
     const audioBeep = useRef(0);
     const [{ display}, dispatch] = useStateValue();
     const [padStyle, setPadStyle] = useState(inactiveStyle);
@@ -17,32 +17,23 @@ const Pad = ({bank, activeStyle, inactiveStyle, power}) => {
       }
 
     function activatePad() {
-        // setPadStyle(activeStyle)
-        if (!power) {
-          if (padStyle.backgroundColor === 'orange') {
-              setPadStyle(inactiveStyle)
+        if (power) {
+          if (padStyle.backgroundColor === 'whitesmoke') {
+              setPadStyle(activeStyle)
           } else {
-            setPadStyle(activeStyle)
-          }
-        } else if (padStyle.marginTop === 13) {
             setPadStyle(inactiveStyle)
+          }
         } else {
-            setPadStyle({
-                height: 77,
-                marginTop: 13,
-                backgroundColor: 'grey',
-                boxShadow: '0 3px grey'
-              })
-            }
+            setPadStyle(inactiveStyle)
+          } 
         }
 
     function playSound(){
-        if (audioBeep.current !== null) {
-            // audioBeep.currentTime = 0
-            audioBeep.current.play()
-        }
+        const sound = document.getElementById(bank.keyTrigger);
+        sound.currentTime = 0;
+        sound.play();
+        activatePad();
         setTimeout(() => activatePad(), 100);
-        // activatePad();
         dispatch({
             type: 'UPDATE_DISPLAY',
             item: {
@@ -51,10 +42,22 @@ const Pad = ({bank, activeStyle, inactiveStyle, power}) => {
         })
     }
 
-    return (
+    {
+      const clips = [].slice.call(document.getElementsByClassName('clip'));
+      clips.forEach(sound => {
+        sound.volume = sliderVal;
+      });
+    }
+
+    if(power) { return (
         <div onClick={playSound} style={padStyle} className="drum-pad" id={bank.id}>
             <p>{bank.keyTrigger}</p>
-            <audio className="clip" id={bank.keyTrigger} ref={audioBeep} src={bank.url}></audio>
+            <audio className="clip" id={bank.keyTrigger} src={bank.url}></audio>
+        </div>
+    )} else return (
+      <div onClick={playSound} style={padStyle} className="drum-pad" id={bank.id}>
+            <p>{bank.keyTrigger}</p>
+            <audio className="clip" id={bank.keyTrigger} src="#"></audio>
         </div>
     )
 }
