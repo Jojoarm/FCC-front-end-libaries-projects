@@ -7,7 +7,7 @@ import Calculator from './components/Calculator';
 import Calc from './components/calculator/Calc'
 import MarkdownPreviewer from './components/markdown/MarkdownPreviewer';
 import Timer from './components/timer/Timer';
-import FccTimer from './components/timer/FccTimer';
+import Drum from './components/drum/Drum';
 
 function App() {
   return (
@@ -27,7 +27,10 @@ function App() {
             <MarkdownPreviewer />
           </Route>
           <Route path="/timer">
-            <FccTimer />
+            <Timer />
+          </Route>
+          <Route path="/drum-machine">
+            <Drum />
           </Route>
 
         </Switch>

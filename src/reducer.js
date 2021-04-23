@@ -2,7 +2,8 @@ export const initialState = {
     currentOperand : '0',
     previousOperand : '',
     operation : null,
-    computation: ''
+    computation: '',
+    display: ''
 }
 
 const reducer = (state, action) => {
@@ -58,6 +59,8 @@ const reducer = (state, action) => {
 
         case 'PERCENTAGE':
             return {...state, currentOperand: (state.currentOperand/1000).toFixed(2)}
+        case 'UPDATE_DISPLAY':
+            return {...state, display: action.item.name}
         
         default:
             return state

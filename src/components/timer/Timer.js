@@ -103,55 +103,59 @@ const Timer = () => {
     }
 
     return (
-        <div className="center-align">
-            <h1>25+5 Clock by JoJo</h1>
-            <div className="length__container">
-                <Length 
-                    id={'break-label'}
-                    title={'break length'} 
-                    changeTime={changeTime} 
-                    type={'break'} 
-                    time={breakTime} 
-                    formatTime={formatTime} 
-                    showTime={showTime}
-                />
-                <Length 
-                    id={'session-label'}
-                    title={'session length'} 
-                    changeTime={changeTime} 
-                    type={'session'} 
-                    time={sessionTime} 
-                    formatTime={formatTime} 
-                    showTime={showTime}
+        <div className="timer">
+            <div className="timer__container">
+                <h1>25+5 Clock by JoJo</h1>
+                <div className="length__container">
+                    <Length 
+                        id={'break-label'}
+                        title={'break length'} 
+                        changeTime={changeTime} 
+                        type={'break'} 
+                        time={breakTime} 
+                        formatTime={formatTime} 
+                        showTime={showTime}
+                    />
+                    <Length 
+                        id={'session-label'}
+                        title={'session length'} 
+                        changeTime={changeTime} 
+                        type={'session'} 
+                        time={sessionTime} 
+                        formatTime={formatTime} 
+                        showTime={showTime}
+                    />
+                </div>
+                <h3 id="timer-label">{onBreak ? "Break" : "Session"}</h3>
+                <h1 id="time-left">{formatTime(displayTime)}</h1>
+                <div className="control__buttons">
+                    <button id="start_stop" className="btn-large deep-purple lighten-2" onClick={controlTime}>
+                        {timerOn ? (
+                            <i className="material-icons">pause_circle_filled</i>
+                        ) : (
+                            <i className="material-icons">play_circle_filled</i>
+                        )
+                    }
+                    </button>
+                    <button id="reset" className="btn-large deep-purple lighten-2" onClick={resetTime}>
+                        <i className="material-icons">autorenew</i>
+                    </button>
+                </div>
+                <audio
+                    id="beep"
+                    preload="auto"
+                    ref={audioBeep}
+                    type='audio'
+                    src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
                 />
             </div>
-            <h3 id="timer-label">{onBreak ? "Break" : "Session"}</h3>
-            <h1 id="time-left">{formatTime(displayTime)}</h1>
-            <button id="start_stop" className="btn-large deep-purple lighten-2" onClick={controlTime}>
-                {timerOn ? (
-                    <i className="material-icons">pause_circle_filled</i>
-                ) : (
-                    <i className="material-icons">play_circle_filled</i>
-                )
-            }
-            </button>
-            <button id="reset" className="btn-large deep-purple lighten-2" onClick={resetTime}>
-                <i className="material-icons">autorenew</i>
-            </button>
-            <audio
-                id="beep"
-                preload="auto"
-                ref={audioBeep}
-                type='audio'
-                src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
-            />
         </div>
     )
 }
 
 function Length({ id, title, changeTime, type, time, formatTime, showTime }){
     return(
-        <div>
+        <div className="length__box">
             <h3 id={id}>{title}</h3>
             <div className="time__sets">
                 <button id={`${type ==='break' ? 'break-decrement' : 'session-decrement'}`} className="btn-small deep-purple lighten-2" onClick={() => changeTime(-60, type)}>
